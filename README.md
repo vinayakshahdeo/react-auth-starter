@@ -16,6 +16,8 @@
 
 ## 3 => Biological-based authentication
 
-##### verifying user's identities based on hard to fake biological characteristics. ex facial re4cognition, iris scan, fingerprint etc
+##### verifying user's identities based on hard to fake biological characteristics. ex facial re4cognition, iris scan, fingerprint etc.
+
+### problems rely directly on physical hardware devices.
 
 # Two factor authentication makes use of knowledge based and ownership based authentication.
