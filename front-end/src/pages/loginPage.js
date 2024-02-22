@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import axios from 'axios';
+import { useToken } from '../auth/useToken';
 
 const LoginPage = () => {
+	const [token, setToken] = useToken();
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
+
 	const history = useHistory();
 
-	const checkLogin = () => {
-		alert('not done yes?');
+	const checkLogin = async () => {
+		const response = await axios.post('/api/login', { username, password });
+		const { token } = response.data;
+		setToken(token);
+		history.push('/');
 	};
 	return (
 		<div className='content-container'>
