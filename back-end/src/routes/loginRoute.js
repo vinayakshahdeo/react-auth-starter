@@ -11,11 +11,12 @@ export const LoginRoute = {
 		const user = await db.collection('users').findOne({ username });
 		if (!user) res.sendStatus(401);
 
-		const { id, isVerified, passwordHash, info } = user;
+		const { _id, isVerified, passwordHash, info } = user;
+		console.log({ user });
 		const isCorrect = await bcrypt.compare(password, passwordHash);
 		if (isCorrect) {
 			jwt.sign(
-				{ id, isVerified, info, username },
+				{ id: _id, isVerified, info, username },
 				process.env.JWT_SECRET,
 				{ expiresIn: '2d' },
 				(err, token) => {

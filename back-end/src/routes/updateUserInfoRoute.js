@@ -2,19 +2,18 @@ import jwt from 'jsonwebtoken';
 import { ObjectID } from 'mongodb';
 import { getDbConnection } from '../db';
 
-export const updateUserInfoRoute = {
+export const UpdateUserInfoRoute = {
 	path: '/api/users/:userId',
 	method: 'put',
 	handler: async (req, res) => {
 		const { authorization } = req.headers;
 		const { userId } = req.params;
 
-		const updates = ({ favoriteFood, hairColor, bio }) =>
-			({
-				favoriteFood,
-				hairColor,
-				bio,
-			}(req.body));
+		const updates = (({ favoriteFood, hairColor, bio }) => ({
+			favoriteFood,
+			hairColor,
+			bio,
+		}))(req.body);
 
 		if (!authorization)
 			return res
@@ -36,7 +35,7 @@ export const updateUserInfoRoute = {
 					.json({ message: 'Not allowed to update the user data' });
 
 			const db = getDbConnection('react-auth-db');
-
+			console.log(updates);
 			const result = await db
 				.collection('users')
 				.findOneAndUpdate(
