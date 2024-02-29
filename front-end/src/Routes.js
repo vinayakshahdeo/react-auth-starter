@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { UserInfoPage } from './pages/UserInfoPage';
+import { UserInfoPage } from './pages/userInfoPage';
 import LoginPage from './pages/loginPage';
 import SignUpPage from './pages/signupPage';
 import PrivateRoute from './auth/privateRoute';
+import { PleaseVerifyEmail } from './pages/pleaseVerifyEmail';
+import { EmailVerificationLandingPage } from './pages/emailVerificationLandingPage';
 export const Routes = () => {
 	return (
 		<Router>
@@ -17,7 +19,13 @@ export const Routes = () => {
 					<SignUpPage />
 				</Route>
 				<Route path='/forgot-password' exact>
-					<div>lost t?</div>
+					<div>lost it?</div>
+				</Route>
+				<Route path='/please-verify'>
+					<PleaseVerifyEmail />
+				</Route>
+				<Route path='/verify-email/:verificationString'>
+					<EmailVerificationLandingPage />
 				</Route>
 			</Switch>
 		</Router>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useToken } from '../auth/useToken';
 
 const LoginPage = () => {
-	const [token, setToken] = useToken();
+	const [, setToken] = useToken();
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
@@ -12,10 +12,17 @@ const LoginPage = () => {
 	const history = useHistory();
 
 	const checkLogin = async () => {
-		const response = await axios.post('/api/login', { username, password });
-		const { token } = response.data;
-		setToken(token);
-		history.push('/');
+		try {
+			const response = await axios.post('/api/login', {
+				username,
+				password,
+			});
+			const { token } = response.data;
+			setToken(token);
+			history.push('/');
+		} catch (error) {
+			setErrorMessage(error);
+		}
 	};
 	return (
 		<div className='content-container'>
