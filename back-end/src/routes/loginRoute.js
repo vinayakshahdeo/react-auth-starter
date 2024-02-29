@@ -12,7 +12,7 @@ export const LoginRoute = {
 		if (!user) res.sendStatus(401);
 
 		const { _id, isVerified, passwordHash, info } = user;
-		console.log({ user });
+		// console.log({ user });
 		const isCorrect = await bcrypt.compare(password, passwordHash);
 		if (isCorrect) {
 			jwt.sign(

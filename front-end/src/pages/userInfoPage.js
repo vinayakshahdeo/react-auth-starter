@@ -3,12 +3,13 @@ import { useHistory } from 'react-router-dom';
 import { useUser } from '../auth/useUser';
 import { useToken } from '../auth/useToken';
 import axios from 'axios';
+
 export const UserInfoPage = () => {
 	const user = useUser();
 	const [token, setToken] = useToken();
 
-	const { id, username, info } = user;
-	console.log({ id });
+	const { id, username, isVerified, info } = user;
+	// console.log({ id });
 	// We'll use the history to navigate the user
 	// programmatically later on (we're not using it yet)
 	const history = useHistory();
@@ -70,6 +71,12 @@ export const UserInfoPage = () => {
 	return (
 		<div className='content-container'>
 			<h1>Info for {username}</h1>
+			{!isVerified && (
+				<div className='fail'>
+					You won't be able to make any changes until you verify your
+					email.
+				</div>
+			)}
 			{showSuccessMessage && (
 				<div className='success'>Successfully saved user data!</div>
 			)}
